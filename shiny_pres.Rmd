@@ -1,0 +1,164 @@
+---
+title: "Untitled"
+author: "JT McCrone"
+date: "May 30, 2016"
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller : true
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Background
+
+* We are interested in within host diversity of influenza virus (RNA genome).
+  * Translation : We do a lot of sequencing of viral swabs, and look for single nucleotide variants present at various frequencies *within a single person*
+
+
+
+
+## Motivation : What is the accuracy of our method?
+
+
+<img src="./assets/img/sequencing_pipeline.png"  style="width:685px;height:255px;">
+
+
+
+
+## Experimental set up
+
+
+<img src="./assets/img/Hiseq_setup.png"  style="width:372px;height:526px;">
+
+
+
+
+## Initial Accuracy
+
+
+
+<img src="./assets/img/initial_accuracy.png"  style="width:399px;height:439px;">
+
+
+
+
+
+## Many variables
+
+* Whether or not to include pcr duplicate reads
+* Which p value correction method to use (Bonferroni or Benjamini Hochberg)
+* Should the DeepSNV error model be a binomial model or a betabinomial.
+* If betabinomial should the test be onesided or twosided (two sided is recommend with large amounts of PCR amiplication) 
+* What p value threshold to use
+* What mapping qualilty threshold to apply (if any)
+* What Phred score threshold to apply (if any)
+* What read position threshold should be applied (if any)
+* What frequency threshold to apply (if any)
+* Should only the coding regions be included in analysis
+* Should the ends of the genomic segements be excluded from analysis (if so how much should be trimmed)
+
+
+
+
+
+## Shiny app!
+
+```{r,eval=F}
+shinyAppDir(appDir = "~/Desktop/benchmarking_shiny/20_mut_data_set/",options = list(width="110%",height="100%"))
+```
+
+
+
+## What is Shiny
+
+
+"A web application framework for R
+
+Turn your analyses into interactive web applications
+
+No HTML, CSS, or JavaScript knowledge required"
+
+http://shiny.rstudio.com
+
+
+
+
+## Example
+
+```{r, echo = FALSE}
+shinyApp(
+  
+  ui = bootstrapPage(
+
+  selectInput(inputId = "n_breaks",
+      label = "Number of bins in histogram (approximate):",
+      choices = c(10, 20, 35, 50),
+      selected = 20),
+
+  checkboxInput(inputId = "individual_obs",
+      label = strong("Show individual observations"),
+      value = FALSE),
+
+  checkboxInput(inputId = "density",
+      label = strong("Show density estimate"),
+      value = FALSE),
+
+  plotOutput(outputId = "main_plot", height = "300px"),
+
+  # Display this only if the density is shown
+  conditionalPanel(condition = "input.density == true",
+    sliderInput(inputId = "bw_adjust",
+        label = "Bandwidth adjustment:",
+        min = 0.2, max = 2, value = 1, step = 0.2)
+  )
+
+),
+  
+  server = function(input, output) {
+      output$main_plot <- renderPlot({
+
+    hist(faithful$eruptions,
+      probability = TRUE,
+      breaks = as.numeric(input$n_breaks),
+      xlab = "Duration (minutes)",
+      main = "Geyser eruption duration")
+
+    if (input$individual_obs) {
+      rug(faithful$eruptions)
+    }
+
+    if (input$density) {
+      dens <- density(faithful$eruptions,
+          adjust = input$bw_adjust)
+      lines(dens, col = "blue")
+    }
+
+  })
+},
+  options = list(height = 500)
+)
+
+
+
+```
+
+
+
+
+
+## How it works (the data)
+
+```{r,tidy=T,size='small',echo=F}
+data<-read.csv("./apps/processed_data/no.dups.bonferroni.bin.sum.csv",stringsAsFactors = F)
+head(subset(data,select=c(gc,exp.freq,mutation,pos,p.val,freq.var,MapQ,Read_pos,Phred,category)),n=3)
+
+
+
+```
+
+
+

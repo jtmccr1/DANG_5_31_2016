@@ -1,0 +1,16 @@
+base
+devtools
+slidify
+shiny
+slidifyLibraries
+rCharts
+XML
+plyr
+ggplot2
+pROC
+BiocGenerics
+S4Vectors
+IRanges
+XVector
+Biostrings
+reshape2

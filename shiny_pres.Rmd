@@ -580,7 +580,7 @@ n1
 ```
 
 
-<iframe src="./examplerchart.html"></iframe>
+<iframe src="./assets/img/examplerchart.html"></iframe>
 
 ## Plotly
 

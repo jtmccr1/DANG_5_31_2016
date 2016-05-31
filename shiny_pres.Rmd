@@ -2,7 +2,7 @@
 title: "Interactive plots"
 subtitle: "Play with data - Impress your friends"
 author: "JT McCrone"
-date: "May 30, 2016"
+date: "https://github.com/jtmccr1/DANG_5_31_2016"
 output: 
   ioslides_presentation:
     smaller: yes
@@ -56,17 +56,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Many variables
 
-* Whether or not to include pcr duplicate reads
+* Whether or not to include PCR duplicate reads
 * Which p value correction method to use (Bonferroni or Benjamini Hochberg)
-* Should the DeepSNV error model be a binomial model or a betabinomial.
-* If betabinomial should the test be onesided or twosided (two sided is recommend with large amounts of PCR amiplication) 
+* Should the DeepSNV error model be a binomial model or a beta binomial.
+* If beta binomial should the test be one sided or two sided (two sided is recommend with large amounts of PCR amplification) 
 * What p value threshold to use
-* What mapping qualilty threshold to apply (if any)
+* What mapping quality threshold to apply (if any)
 * What Phred score threshold to apply (if any)
 * What read position threshold should be applied (if any)
 * What frequency threshold to apply (if any)
 * Should only the coding regions be included in analysis
-* Should the ends of the genomic segements be excluded from analysis (if so how much should be trimmed)
+* Should the ends of the genomic segments be excluded from analysis (if so how much should be trimmed)
 
 
 
@@ -74,7 +74,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Shiny app!
 
-```{r,eval=F}
+```{r,eval=T}
 shinyAppDir(appDir = "~/Desktop/benchmarking_shiny/20_mut_data_set/",options = list(width="110%",height="100%"))
 ```
 
@@ -395,8 +395,9 @@ renderUI                    	a Shiny tag object or HTML
 
 ```{r,eval=F,echo=T}
 function(input, output) {
-      output$main_plot <- renderPlot({ # populates plotOutput(outputId = "main_plot", height = "300px")
-
+  ##<b>   
+   output$main_plot <- renderPlot({ # populates plotOutput(outputId = "main_plot", height = "300px")
+  ##</b>
     hist(faithful$eruptions,
       probability = TRUE,
       breaks = as.numeric(input$n_breaks), # from - selectInput(inputId = "n_breaks",
@@ -419,8 +420,17 @@ function(input, output) {
 
 ```
 
+## My Shiny app  - ui.R 
 
-## My shiny app  - ui.R 
+<div class="centered">
+
+
+<img src="./assets/img/plots_table.png">
+
+</div>
+
+
+## My Shiny app  - ui.R 
 
 
 ```{r,echo=T,eval=F}
@@ -443,6 +453,16 @@ shinyUI(fluidPage(
       hr(), # horizontal line
 ```
 
+## ui.R - Inputs
+
+<div class="centered">
+
+
+<img src="./assets/img/inputs.png">
+
+</div>
+
+
 ## ui.R Inputs
 
 ```{r,echo=T,eval=F}
@@ -464,6 +484,14 @@ fluidRow(
         ),
     
 ```
+
+## ui.R Second tab
+<div class="centered">
+
+
+<img src="./assets/img/second_tab.png">
+
+</div>
 
 
 ## ui.R Second tab
@@ -556,7 +584,7 @@ output$myChart <- renderChart2({
   * No HTML,css,javascript required
 * Allows one to interact with the data on all levels
 * Requires an active R session
-* Great tutorials avalaible 
+* Great tutorials available 
 * Well documented
 
 ## Other means of interactivity in R
@@ -567,7 +595,7 @@ output$myChart <- renderChart2({
 * R code => javascript charts
 * Support base and lattice style plots
 * Easy to share/embed 
-* Ok documentation -http://rcharts.io
+* OK documentation -http://rcharts.io
 
 
 ## Example
@@ -589,7 +617,7 @@ n1
 * Well documented
 
 ## Plotly example
-```{r,message=F,warning=F}
+```{r,message=F,warning=F,echo=T,fig.height=3.7}
 require(plotly)
 require(ggplot2)
 hair_eye_male <- subset(as.data.frame(HairEyeColor), Sex == "Male")
@@ -600,7 +628,7 @@ example
 
 
 ## Plotly example (cont.)
-```{r}
+```{r,echo=T}
 ggplotly(example)
 ```
 
@@ -613,8 +641,11 @@ ggplotly(example)
   * Requires an active R session
 2) rCharts & Plotly
   * Less powerful
-  * Provide a different form of interactivitiy
+  * Provide a different form of interactivity
   * Less documented but getting there
   * produce stand alone html 
 
 ## Questions?
+
+* https://github.com/jtmccr1/DANG_5_31_2016
+* http://lauringlab.github.io/benchmarking_shiny/

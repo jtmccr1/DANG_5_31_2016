@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive plots</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+  <meta name="date" content="2016-05-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="file45f17cb51f24_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="file45f17cb51f24_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="file45f17cb51f24_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Interactive plots',
+                        subtitle: 'Play with data - Impress your friends',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  'JT McCrone' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">May 30, 2016</p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Background</h2></hgroup><article  id="background" class="smaller ">
+
+<ul>
+<li>We are interested in within host diversity of influenza virus (RNA genome).</li>
+<li>Translation : We do a lot of sequencing of viral swabs, and look for single nucleotide variants present at various frequencies <em>within a single person</em></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Motivation : What is the accuracy of our method?</h2></hgroup><article  id="motivation-what-is-the-accuracy-of-our-method" class="smaller ">
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/sequencing_pipeline.png"  style="width:685px;height:255px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Experimental set up</h2></hgroup><article  id="experimental-set-up" class="smaller ">
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/Hiseq_setup.png"  style="width:372px;height:526px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Initial Accuracy</h2></hgroup><article  id="initial-accuracy" class="smaller ">
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/initial_accuracy.png"  style="width:399px;height:439px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Many variables</h2></hgroup><article  id="many-variables" class="smaller ">
+
+<ul>
+<li>Whether or not to include pcr duplicate reads</li>
+<li>Which p value correction method to use (Bonferroni or Benjamini Hochberg)</li>
+<li>Should the DeepSNV error model be a binomial model or a betabinomial.</li>
+<li>If betabinomial should the test be onesided or twosided (two sided is recommend with large amounts of PCR amiplication)</li>
+<li>What p value threshold to use</li>
+<li>What mapping qualilty threshold to apply (if any)</li>
+<li>What Phred score threshold to apply (if any)</li>
+<li>What read position threshold should be applied (if any)</li>
+<li>What frequency threshold to apply (if any)</li>
+<li>Should only the coding regions be included in analysis</li>
+<li>Should the ends of the genomic segements be excluded from analysis (if so how much should be trimmed)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Shiny app!</h2></hgroup><article  id="shiny-app" class="smaller ">
+
+</article></slide><slide class=''><hgroup><h2>What is Shiny</h2></hgroup><article  id="what-is-shiny" class="smaller ">
+
+<div class="centered">
+<p>&quot;A web application framework for R</p>
+
+<p>Turn your analyses into interactive web applications</p>
+
+<p>No HTML, CSS, or JavaScript knowledge required&quot;</p>
+
+<p><a href='http://shiny.rstudio.com' title=''>http://shiny.rstudio.com</a></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example" class="smaller ">
+
+<iframe data-deferred-src="appd2f29449c4e9680cadae5da8ae9952dd/?w=&amp;__subapp__=1" width="100%" height="500" class="shiny-frame shiny-frame-deferred"></iframe>
+
+</article></slide><slide class=''><hgroup><h2>Shiny Application Architecture</h2></hgroup><article  id="shiny-application-architecture" class="smaller ">
+
+<p>Two chunks of code</p>
+
+<ol>
+<li>UI - user interface - controls the layout of the app</li>
+<li>Server - R script - code that runs the analysis and populates the plots</li>
+</ol>
+
+<ul>
+<li>Usually two separate files stored in the same directory</li>
+<li>Communicate through <strong>input$</strong> and <strong>output$</strong></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>ui.R</h2></hgroup><article  id="ui.r" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>bootstrapPage( # Page layout
+
+  ## Input values 
+  selectInput(inputId = &quot;n_breaks&quot;,  # name of the input  - for reference in server.R
+      label = &quot;Number of bins in histogram (approximate):&quot;, # label to be displayed on ui
+      choices = c(10, 20, 35, 50), # Input specific options
+      selected = 20), # starting value
+
+  checkboxInput(inputId = &quot;individual_obs&quot;,
+      label = strong(&quot;Show individual observations&quot;),
+      value = FALSE),
+
+  checkboxInput(inputId = &quot;density&quot;,
+      label = strong(&quot;Show density estimate&quot;),
+      value = FALSE),
+
+  # Output plot from server.R
+  plotOutput(outputId = &quot;main_plot&quot;, height = &quot;300px&quot;),
+
+  # Display this only if the density is shown
+  conditionalPanel(condition = &quot;input.density == true&quot;,  # An extra conditional panel
+    sliderInput(inputId = &quot;bw_adjust&quot;, # name of the input  - for reference in server.R
+        label = &quot;Bandwidth adjustment:&quot;, # label to be displayed on ui
+        min = 0.2, max = 2, value = 1, step = 0.2) # Input specific options with starting value
+  )
+
+)</pre>
+
+</article></slide><slide class=''><hgroup><h2>selectInput</h2></hgroup><article  id="selectinput" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>  ## Input values 
+  selectInput(inputId = &quot;n_breaks&quot;,  # name of the input  - for reference in server.R
+      label = &quot;Number of bins in histogram (approximate):&quot;, # label to be displayed on ui
+      choices = c(10, 20, 35, 50), # Input specific options
+      selected = 20), # starting value</pre>
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/selectInput.png"  style="width:600px;height:380px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>checkboxInput</h2></hgroup><article  id="checkboxinput" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>  ## Input values 
+  checkboxInput(inputId = &quot;individual_obs&quot;,
+      label = strong(&quot;Show individual observations&quot;),
+      value = FALSE),</pre>
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/checkInput.png"  style="width:600px;height:380px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Conditional sliderInput</h2></hgroup><article  id="conditional-sliderinput" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>  checkboxInput(inputId = &quot;density&quot;,
+      label = strong(&quot;Show density estimate&quot;),
+      value = FALSE),
+  # Display this only if the density is shown
+  conditionalPanel(condition = &quot;input.density == true&quot;,  # An extra conditional panel
+    sliderInput(inputId = &quot;bw_adjust&quot;, # name of the input  - for reference in server.R
+        label = &quot;Bandwidth adjustment:&quot;, # label to be displayed on ui
+        min = 0.2, max = 2, value = 1, step = 0.2) # Input specific options with starting value
+  )</pre>
+
+<div class="centered">
+<p><img src="file45f17cb51f24_files/./assets/img/conditional.png"  style="width:550px;height:348px;"></p></div>
+
+</article></slide><slide class=''><hgroup><h2>Basic inputs</h2></hgroup><article  id="basic-inputs" class="smaller ">
+
+<iframe data-deferred-src="appd80c4ac178a5d4daeaac495b2a81cd66/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+
+</article></slide><slide class=''><hgroup><h2>Basic outputs</h2></hgroup><article  id="basic-outputs" class="smaller ">
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Command</th>
+<th align="right">Produces</th>
+</tr>
+<tr class="odd">
+<td align="left">htmlOutput</td>
+<td align="right">raw HTML</td>
+</tr>
+<tr class="even">
+<td align="left">imageOutput</td>
+<td align="right">image</td>
+</tr>
+<tr class="odd">
+<td align="left">plotOutput</td>
+<td align="right">plot</td>
+</tr>
+<tr class="even">
+<td align="left">tableOutput</td>
+<td align="right">table</td>
+</tr>
+<tr class="odd">
+<td align="left">textOutput</td>
+<td align="right">text</td>
+</tr>
+<tr class="even">
+<td align="left">uiOutput</td>
+<td align="right">raw HTML</td>
+</tr>
+<tr class="odd">
+<td align="left">verbatimTextOutput</td>
+<td align="right">text</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>server.R</h2></hgroup><article  id="server.r" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>function(input, output) {
+      output$main_plot &lt;- renderPlot({ # populates plotOutput(outputId = &quot;main_plot&quot;, height = &quot;300px&quot;)
+
+    hist(faithful$eruptions,
+      probability = TRUE,
+      breaks = as.numeric(input$n_breaks), # from - selectInput(inputId = &quot;n_breaks&quot;,
+      xlab = &quot;Duration (minutes)&quot;,
+      main = &quot;Geyser eruption duration&quot;)
+
+    if (input$individual_obs) { # from - checkboxInput(inputId = &quot;individual_obs&quot;,
+      rug(faithful$eruptions)
+    }
+
+    if (input$density) { # from checkboxInput(inputId = &quot;density&quot;,
+      dens &lt;- density(faithful$eruptions,
+          adjust = input$bw_adjust)     # from - conditionalPanel(condition = &quot;input.density == true&quot;,  
+            lines(dens, col = &quot;blue&quot;)   #         sliderInput(inputId = &quot;bw_adjust&quot;,
+      
+    }
+
+  })
+}</pre>
+
+</article></slide><slide class=''><hgroup><h2>Building reactive outputs</h2></hgroup><article  id="building-reactive-outputs" class="smaller ">
+
+<pre class = 'prettyprint lang-r'> reactive.df&lt;-reactive({
+   ## code that involves some input$ that will be rerun each time the input changes
+ })</pre>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Command</th>
+<th align="right">Produces</th>
+</tr>
+<tr class="odd">
+<td align="left">renderImage</td>
+<td align="right">images (saved as a link to a source file)</td>
+</tr>
+<tr class="even">
+<td align="left">renderPlot</td>
+<td align="right">plots</td>
+</tr>
+<tr class="odd">
+<td align="left">renderPrint</td>
+<td align="right">any printed output</td>
+</tr>
+<tr class="even">
+<td align="left">renderTable</td>
+<td align="right">data frame, matrix, other table like structures</td>
+</tr>
+<tr class="odd">
+<td align="left">renderText</td>
+<td align="right">character strings</td>
+</tr>
+<tr class="even">
+<td align="left">renderUI</td>
+<td align="right">a Shiny tag object or HTML</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Server.R - another look</h2></hgroup><article  id="server.r---another-look" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>function(input, output) {
+      output$main_plot &lt;- renderPlot({ # populates plotOutput(outputId = &quot;main_plot&quot;, height = &quot;300px&quot;)
+
+    hist(faithful$eruptions,
+      probability = TRUE,
+      breaks = as.numeric(input$n_breaks), # from - selectInput(inputId = &quot;n_breaks&quot;,
+      xlab = &quot;Duration (minutes)&quot;,
+      main = &quot;Geyser eruption duration&quot;)
+
+    if (input$individual_obs) { # from - checkboxInput(inputId = &quot;individual_obs&quot;,
+      rug(faithful$eruptions)
+    }
+
+    if (input$density) { # from checkboxInput(inputId = &quot;density&quot;,
+      dens &lt;- density(faithful$eruptions,
+          adjust = input$bw_adjust)     # from - conditionalPanel(condition = &quot;input.density == true&quot;,  
+            lines(dens, col = &quot;blue&quot;)   #         sliderInput(inputId = &quot;bw_adjust&quot;,
+      
+    }
+
+  })
+}</pre>
+
+</article></slide><slide class=''><hgroup><h2>My shiny app - ui.R</h2></hgroup><article  id="my-shiny-app---ui.r" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>shinyUI(fluidPage(
+  titlePanel(&quot;Benchmarking variant caller&quot;), # Main title
+  tabsetPanel( # make mulitple tabs
+  
+      tabPanel(&quot;Overview&quot;, #first tab title
+<b>        fluidRow( # split first tab by fluidRows (must sum to 12)
+        column(6,  # This makes a column that takes up half the page
+               h4(&quot;ROC&quot;), # title
+               showOutput(&quot;myChart&quot;, &quot;nvd3&quot;)), # display rchart output
+        column(6, # the other half
+               h4(&quot;Output table&quot;),
+               tableOutput(&#39;table&#39;))
+      ),
+</b>      hr(), # horizontal line</pre>
+
+</article></slide><slide class=''><hgroup><h2>ui.R Inputs</h2></hgroup><article  id="ui.r-inputs" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>fluidRow(
+        column(3,     # Here I have 4 columns of equal width 3 X 4 =12
+               sliderInput(inputId = &quot;MapQ&quot;,  # slider input for MapQ
+                            label = &quot;Mean MapQ cutoff&quot;,
+                            min=0,max=42,value=0),
+               sliderInput(inputId = &quot;Phred&quot;,   
+                           label = &quot;Mean Phred cutoff&quot;,
+                           min=30,max=42,value=30),
+               
+               numericInput(inputId = &quot;freq.var&quot;,  # numerical input for frequency cutoff
+                            label = &quot;Frequency cutoff&quot;,
+                            value=0),
+               numericInput(inputId = &quot;p.val&quot;,
+                            label = &quot;p value cutoff&quot;,
+                            value=0.01)
+        ),</pre>
+
+</article></slide><slide class=''><hgroup><h2>ui.R Second tab</h2></hgroup><article  id="ui.r-second-tab" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>tabPanel(&quot;Remaining Variants&quot;, # The second tab with graphs of the remaining variants
+             fluidRow(
+               column(12, # only 1 column here
+                      #plotOutput(&quot;samp.dis&quot;),
+<b>                      plotOutput(&quot;freq&quot;),
+                      plotOutput(&quot;mean.pos&quot;),
+                      plotOutput(&quot;mean.qual&quot;)
+</b>                      #plotOutput(&quot;mean.mapq&quot;),
+                      #plotOutput(&quot;position&quot;)
+                      
+                )
+             )  
+    )</pre>
+
+</article></slide><slide class=''><hgroup><h2>server.R - reading in data</h2></hgroup><article  id="server.r---reading-in-data" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>shinyServer(function(input, output) {
+<b>  dataInput&lt;-reactive({  #### changes to data used ##########
+    criteria&lt;-paste0(input$dups,&quot;.*&quot;,input$method,&quot;.*&quot;,input$disp,&quot;.*&quot;,&quot;sum.csv$&quot;)
+    file&lt;-list.files(path = &quot;~/Desktop/benchmarking_shiny/20_mut_data_set/processed_data&quot;,pattern = criteria,full.names = T)
+    print(file)
+
+    sum.df.raw&lt;-read.csv(file,comment.char=&#39;#&#39;,stringsAsFactors = F)
+    print(names(sum.df.raw))
+    return(sum.df.raw)
+  })
+</b> data.c&lt;-reactive({
+    sum.df&lt;-dataInput()
+    if(input$coding==T){
+      
+      sum.df&lt;-ddply(sum.df,~chr,coding.cut)
+      return(sum.df)
+    }else{
+      return(sum.df)
+    }
+  })</pre>
+
+</article></slide><slide class=''><hgroup><h2>server.R - subsetting and ROC curve</h2></hgroup><article  id="server.r---subsetting-and-roc-curve" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>output$myChart &lt;- renderChart2({
+<b>    sum.df&lt;-data() # get data
+    possible_vars&lt;-possible.vars() # get possible_vars from reactive
+    #subset data based on input
+    cut.df&lt;-subset(x=sum.df,MapQ&gt;input$MapQ &amp; Phred&gt;input$Phred &amp; gc==input$gc_roc &amp; freq.var&gt;input$freq.var&amp; Read_pos&lt;=input$pos[2] &amp; Read_pos&gt;=input$pos[1]&amp; exp.freq %in% input$exp.freq) 
+</b>    h.roc.df&lt;-hiseq.roc(cut.df,20,possible_vars,&quot;&gt;&quot;) # make ROC data frame
+    #format data frame for plotting
+    r_plot&lt;-h.roc.df[order(h.roc.df$adj.specificity,decreasing = T),]
+    r_plot&lt;-mutate(r_plot,FDR=1-adj.specificity,threshold=format(threshold,scientific=T,digits=3))
+    r_plot&lt;-mutate(r_plot, gc = paste0(&quot;10^&quot;,sub(pat,&quot;\\1&quot;,samp)))
+    print(head(r_plot))
+    
+    #### make rchart ####
+    rp &lt;- nPlot(adj.sensitivity~FDR, group=c(&quot;exp.freq&quot;), data = r_plot, type = &quot;lineChart&quot;)
+    rp$params$width = 450
+    rp$params$height = 450
+    rp$chart(forceX = c(0,0.005))
+    rp$chart(forceY = c(0,1))
+    rp$chart(tooltipContent = &quot;#! function(key, x, y, e){
+  return &#39;&lt;b&gt;P=&lt;/b&gt;: &#39; + e.point.threshold + 
+  &#39;&lt;b&gt; FP&lt;/b&gt;: &#39;+e.point.FP+ &#39;&lt;b&gt; TP&lt;/b&gt;: &#39;+e.point.TP
+} !#&quot;)
+    rp$yAxis( axisLabel = &quot;Sensitivity&quot; )
+    rp$xAxis( axisLabel = &quot;1-Specificity&quot;)
+    rp
+  })</pre>
+
+</article></slide><slide class=''><hgroup><h2>Shiny</h2></hgroup><article  id="shiny" class="smaller ">
+
+<ul>
+<li>Straightforward means of producing interactive graphs using only R code</li>
+<li>No HTML,css,javascript required</li>
+<li>Allows one to interact with the data on all levels</li>
+<li>Requires an active R session</li>
+<li>Great tutorials avalaible</li>
+<li>Well documented</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Other means of interactivity in R</h2></hgroup><article  id="other-means-of-interactivity-in-r" class="smaller ">
+
+<ul>
+<li>Produce interactive HTML plots that can stand alone - No R session needed</li>
+<li>Less powerful than Shiny</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>rcharts</h2></hgroup><article  id="rcharts" class="smaller ">
+
+<ul>
+<li>R code =&gt; javascript charts</li>
+<li>Support base and lattice style plots</li>
+<li>Easy to share/embed</li>
+<li>Ok documentation -<a href='http://rcharts.io' title=''>http://rcharts.io</a></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example-1" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>library(rCharts)
+hair_eye_male &lt;- subset(as.data.frame(HairEyeColor), Sex == &quot;Male&quot;)
+n1 &lt;- nPlot(Freq ~ Hair, group = &quot;Eye&quot;, data = hair_eye_male, type = &quot;multiBarChart&quot;)
+n1</pre>
+
+<iframe src="file45f17cb51f24_files/./assets/img/examplerchart.html">
+
+</iframe>
+
+</article></slide><slide class=''><hgroup><h2>Plotly</h2></hgroup><article  id="plotly" class="smaller ">
+
+<ul>
+<li>My new favorite</li>
+<li>Very easy to plot ggplot2 style plots</li>
+<li>Well documented</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Plotly example</h2></hgroup><article  id="plotly-example" class="smaller ">
+
+<p><img src="file45f17cb51f24_files/figure-html/unnamed-chunk-17-1.png" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Plotly example (cont.)</h2></hgroup><article  id="plotly-example-cont." class="smaller ">
+
+<div id="htmlwidget-9454" style="width:720px;height:432px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9454">{"x":{"data":[{"x":[0.6625,1.6625,2.6625,3.6625],"y":[32,53,10,3],"text":["as.factor(Hair): Black<br>Freq: 32<br>Eye: Brown","as.factor(Hair): Brown<br>Freq: 53<br>Eye: Brown","as.factor(Hair): Red<br>Freq: 10<br>Eye: Brown","as.factor(Hair): Blond<br>Freq: 3<br>Eye: Brown"],"key":null,"type":"bar","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Brown","legendgroup":"Brown","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[0.8875,1.8875,2.8875,3.8875],"y":[11,50,10,30],"text":["as.factor(Hair): Black<br>Freq: 11<br>Eye: Blue","as.factor(Hair): Brown<br>Freq: 50<br>Eye: Blue","as.factor(Hair): Red<br>Freq: 10<br>Eye: Blue","as.factor(Hair): Blond<br>Freq: 30<br>Eye: Blue"],"key":null,"type":"bar","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Blue","legendgroup":"Blue","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[1.1125,2.1125,3.1125,4.1125],"y":[10,25,7,5],"text":["as.factor(Hair): Black<br>Freq: 10<br>Eye: Hazel","as.factor(Hair): Brown<br>Freq: 25<br>Eye: Hazel","as.factor(Hair): Red<br>Freq: 7<br>Eye: Hazel","as.factor(Hair): Blond<br>Freq: 5<br>Eye: Hazel"],"key":null,"type":"bar","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Hazel","legendgroup":"Hazel","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"},{"x":[1.3375,2.3375,3.3375,4.3375],"y":[3,15,7,8],"text":["as.factor(Hair): Black<br>Freq: 3<br>Eye: Green","as.factor(Hair): Brown<br>Freq: 15<br>Eye: Green","as.factor(Hair): Red<br>Freq: 7<br>Eye: Green","as.factor(Hair): Blond<br>Freq: 8<br>Eye: Green"],"key":null,"type":"bar","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Green","legendgroup":"Green","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text"}],"layout":{"margin":{"b":42.130898021309,"l":37.2602739726027,"t":28.1765601217656,"r":7.30593607305936},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"type":"linear","autorange":false,"tickmode":"array","range":[0.4,4.6],"ticktext":["Black","Brown","Red","Blond"],"tickvals":[1,2,3,4],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Hair Color","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"type":"linear","autorange":false,"tickmode":"array","range":[-2.65,55.65],"ticktext":["0","20","40"],"tickvals":[0,20,40],"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"domain":[0,1],"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"Count","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.903762029746282},"annotations":[{"text":"Eye","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"top"}],"barmode":"stack","bargap":0,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToRemove":["sendDataToCloud"]},"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+</article></slide><slide class=''><hgroup><h2>In conclusion</h2></hgroup><article  id="in-conclusion" class="smaller ">
+
+<ol>
+<li>Shiny</li>
+</ol>
+
+<ul>
+<li>Very powerful</li>
+<li>Alter all aspects of data and plots</li>
+<li>Well documented</li>
+<li>Requires an active R session</li>
+</ul>
+
+<ol>
+<li>rCharts &amp; Plotly</li>
+</ol>
+
+<ul>
+<li>Less powerful</li>
+<li>Provide a different form of interactivitiy</li>
+<li>Less documented but getting there</li>
+<li>produce stand alone html</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Questions?</h2></hgroup><article  id="questions" class="smaller "></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="file45f17cb51f24_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

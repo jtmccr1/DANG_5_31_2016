@@ -7,6 +7,7 @@ output:
   ioslides_presentation:
     smaller: yes
     widescreen: yes
+    toc: true
 runtime: shiny
 ---
 
@@ -17,12 +18,23 @@ runtime: shiny
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Overview
+
+1. Biological motivation
+2. Solution : Interactive Shiny app
+3. What is Shiny
+4. Smaller example
+5. Walk through some of my code
+6. Other reactive plots
+
 ## Background
 
 * We are interested in within host diversity of influenza virus (RNA genome).
   * Translation : We do a lot of sequencing of viral swabs, and look for single nucleotide variants present at various frequencies *within a single person*
 
-
+<div class="centered">
+<img src="http://www.nature.com/nrmicro/journal/v11/n5/images_article/nrmicro3003-f1.jpg"  >
+</div>
 
 
 ## Motivation : What is the accuracy of our method?
@@ -96,7 +108,7 @@ http://shiny.rstudio.com
 
 ## Example
 
-```{r, echo = FALSE}
+```{r, echo = FALSE,eval=T}
 shinyApp(
   
   ui = bootstrapPage(
@@ -253,7 +265,7 @@ bootstrapPage( # Page layout
 
 ## Basic inputs
 
-```{r}
+```{r,eval=T}
 shinyApp(
   ui= fluidPage(
   #titlePanel("Basic widgets"),
@@ -634,12 +646,12 @@ ggplotly(example)
 
 ## In conclusion 
 
-1) Shiny
+1. Shiny
   * Very powerful
   * Alter all aspects of data and plots
   * Well documented
   * Requires an active R session
-2) rCharts & Plotly
+2. rCharts & Plotly
   * Less powerful
   * Provide a different form of interactivity
   * Less documented but getting there
